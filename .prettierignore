@@ -1,0 +1,11 @@
+abi.json
+.env
+/.vscode
+.next
+.node_modules
+package.json
+postcss.config.json
+tailwind.config.ts
+tsconfig.ts
+yarn.lock
+.json
