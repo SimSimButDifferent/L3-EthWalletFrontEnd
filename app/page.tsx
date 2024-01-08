@@ -1,9 +1,13 @@
 import Image from "next/image"
+import EthWallet from "@/components/EthWallet"
 
 export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24 pt-4 bg-[url(../public/Space-Background.jpg)]">
             <h1 className="text-6xl">EthWallet App</h1>
+            <div>
+                <EthWallet />
+            </div>
 
             <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
                 <a
