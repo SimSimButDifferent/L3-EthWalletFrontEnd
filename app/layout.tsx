@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google"
 import "./globals.css"
 import { Web3ModalProvider } from "@/context/Web3Modal"
 
-const inter = Poppins({ weight: ["200", "300", "400"], subsets: ["latin"] })
+const inter = Poppins({ weight: ["200", "300", "400", "500" , "600"], subsets: ["latin"] })
 
 export const metadata = {
     title: "EthWallet App",

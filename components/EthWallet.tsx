@@ -2,7 +2,7 @@
 
 import { ethers, Contract, BrowserProvider} from "ethers";
 import abi from "../context/abi.json";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -12,6 +12,7 @@ const contractAddressLocal = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 export default function EthWallet(){
 
     const [depositAmount, setDepositAmount] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')
 
     async function deposit(value: any) {
       
@@ -19,7 +20,7 @@ export default function EthWallet(){
       
       const getSigner = provider.getSigner()
       const signer = await getSigner
-      const ethWallet = new Contract(contractAddress, abi, signer)
+      const ethWallet = new Contract(contractAddressLocal, abi, signer)
       const tx = await ethWallet.deposit({value: ethers.parseEther(value)})
       tx.wait()
 
@@ -30,6 +31,10 @@ export default function EthWallet(){
       event.preventDefault();
       try {
         await deposit(depositAmount);
+        setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`);
+        setDepositAmount(''); // Optional: Reset input field after successful deposit
+        setTimeout(() => setSuccessMessage(''), 10000)
+        
         // Optionally, you can add code here to handle a successful deposit,
         // such as displaying a success message.
       } catch (error) {
@@ -53,6 +58,7 @@ export default function EthWallet(){
             Deposit
           </button>
         </div>
+        {successMessage && <div className="flex justify-center px-4 py-2 text-2xl bg-violet-500 rounded-lg animate-fadeOut">{successMessage}</div>}
       </form>
     ) 
 }
