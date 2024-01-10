@@ -1,6 +1,7 @@
 import React from "react"
 
 const Header: React.FC = () => {
+
     return (
         <nav className="bg-violet-900 bg-opacity-30">
             <div className="flex flex-cols-2 justify-end">

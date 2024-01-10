@@ -1,6 +1,7 @@
 "use client"
 
 import { ethers, Contract, BrowserProvider } from "ethers"
+import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import abi from "../context/abi.json"
 import React, { useState, useEffect } from "react"
 import * as dotenv from "dotenv"
@@ -10,36 +11,53 @@ const contractAddress = "0x0597071313ae58624FFbbDAB8643aD96E27eD3bc"
 const contractAddressLocal = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 export default function EthWallet() {
+    const { address, chainId, isConnected } = useWeb3ModalAccount()
+
     const [depositAmount, setDepositAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     async function deposit(value: any) {
+        if (!isConnected) throw Error("User Disconnected")
         const provider = new BrowserProvider(window.ethereum)
 
         const getSigner = provider.getSigner()
         const signer = await getSigner
         const ethWallet = new Contract(contractAddressLocal, abi, signer)
         const tx = await ethWallet.deposit({ value: ethers.parseEther(value) })
-        tx.wait()
+        const receipt = await tx.wait()
 
         console.log(`${value.toString()} ETH Deposited!`)
+        return receipt
+    }
+
+    async function getUserBalance() {
+        const provider = new BrowserProvider(window.ethereum)
+
+        const getSigner = provider.getSigner()
+        const signer = await getSigner
+        const ethWallet = new Contract(contractAddressLocal, abi, signer)
+
+        const tx = await ethWallet.getUserBalance()
+        const receipt = await tx.wait()
+
+        return receipt
     }
 
     const handleDepositSubmit = async (event) => {
         event.preventDefault()
+        setIsLoading(true)
         try {
             await deposit(depositAmount)
+
             setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`)
             setDepositAmount("") // Optional: Reset input field after successful deposit
             setTimeout(() => setSuccessMessage(""), 10000)
-
-            // Optionally, you can add code here to handle a successful deposit,
-            // such as displaying a success message.
         } catch (error) {
-            // Here, you can handle errors that may occur during the deposit process.
-            // This could include displaying an error message to the user.
             console.error("Error during deposit: ", error)
+            setSuccessMessage("User Disconnected!")
         }
+        setIsLoading(false)
     }
 
     return (
@@ -54,9 +72,22 @@ export default function EthWallet() {
                 />
                 <button
                     type="submit"
-                    className="px-4 pb-1 bg-sky-500 text-white rounded-lg hover:bg-sky-400"
+                    disabled={isLoading}
+                    className={`px-4 pb-1 ${
+                        isLoading
+                            ? "bg-violet-600"
+                            : "bg-sky-500 hover:bg-sky-400"
+                    } text-white rounded-lg`}
                 >
                     Deposit
+                </button>
+            </div>
+            <div className="flex justify-center">
+                <button
+                    onClick={getUserBalance}
+                    className="flex justify-center px-4 py-2 text-2xl bg-sky-500 hover:bg-sky-400 text-white rounded-lg"
+                >
+                    Get user balance
                 </button>
             </div>
             {successMessage && (
