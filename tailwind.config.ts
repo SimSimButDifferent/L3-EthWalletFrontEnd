@@ -17,25 +17,25 @@ const config: Config = {
                 fadeInOut: "fadeInOut 6s ease-in-out",
                 fadeIn: "fadeIn 10s forwards",
                 fadeOut: "fadeOut 10s backwards 1",
-              },
+            },
             keyframes: {
                 fadeInOut: {
-                  "0%": { opacity: "0" },
-                  "50%": { opacity: "1" },
-                  "100%": { opacity: "0" },
+                    "0%": { opacity: "0" },
+                    "50%": { opacity: "1" },
+                    "100%": { opacity: "0" },
                 },
                 fadeIn: {
-                  "0%": { opacity: "0" },
-                  "100%": { opacity: "1" },
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" },
                 },
                 fadeOut: {
                     "100%": { opacity: "0" },
                     "0%": { opacity: "1" },
-                }
+                },
                 // transitionDelay: { 2000: "2000ms", 4000: "4000ms" },
             },
         },
-    plugins: [],
-    }
+        plugins: [],
+    },
 }
 export default config

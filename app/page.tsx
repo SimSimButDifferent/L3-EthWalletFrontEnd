@@ -4,11 +4,12 @@ import EthWallet from "@/components/EthWallet"
 export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24 pt-4 bg-[url(../public/Space-Background.jpg)]">
-            ;<h1 className="text-6xl rounded-lg border border-transparent px-5 py-4 transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">Eth Wallet App</h1>
+            <h1 className="text-6xl rounded-lg border border-transparent px-5 py-4 transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">
+                Eth Wallet App
+            </h1>
             <div>
                 <EthWallet />
             </div>
-
             <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
                 <a
                     href="https://github.com/SimSimButDifferent/L3-EthWalletFrontEnd"
