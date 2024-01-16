@@ -15,6 +15,7 @@ export default function EthWallet() {
 
     const [depositAmount, setDepositAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
+    const [userBalance, setUserBalance] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     async function deposit(value: any) {
@@ -37,11 +38,12 @@ export default function EthWallet() {
         const getSigner = provider.getSigner()
         const signer = await getSigner
         const ethWallet = new Contract(contractAddressLocal, abi, signer)
+        console.log(signer)
 
-        const tx = await ethWallet.getUserBalance()
-        const receipt = await tx.wait()
+        const balance = await ethWallet.getUserBalance()
+        console.log(balance)
 
-        return receipt
+        setUserBalance(ethers.formatEther(balance)) // Format the balance for display
     }
 
     const handleDepositSubmit = async (event) => {
@@ -89,6 +91,10 @@ export default function EthWallet() {
                 >
                     Get user balance
                 </button>
+                {""}
+                {userBalance && (
+                    <p>User Balance: {userBalance} ETH</p> // Display the balance
+                )}
             </div>
             {successMessage && (
                 <div className="flex justify-center px-4 py-2 text-2xl bg-violet-500 rounded-lg animate-fadeOut">

@@ -1,5 +1,5 @@
 declare global {
-    interface Window {
-      ethereum: Eip1193Provider;
-    }
-   }
+  interface Window {
+    ethereum: Eip1193Provider
+  }
+}
