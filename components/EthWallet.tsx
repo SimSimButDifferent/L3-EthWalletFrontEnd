@@ -3,7 +3,7 @@
 import { ethers, Contract, BrowserProvider } from "ethers"
 import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import abi from "../context/abi.json"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import * as dotenv from "dotenv"
 dotenv.config()
 
@@ -14,6 +14,7 @@ export default function EthWallet() {
     const { address, chainId, isConnected } = useWeb3ModalAccount()
 
     const [depositAmount, setDepositAmount] = useState("")
+    const [withdrawAmount, setWithdrawAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
     const [userBalance, setUserBalance] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -29,6 +30,20 @@ export default function EthWallet() {
         const receipt = await tx.wait()
 
         console.log(`${value.toString()} ETH Deposited!`)
+        return receipt
+    }
+
+    async function withdraw(value: any) {
+        if (!isConnected) throw Error("User Disconnected")
+        const provider = new BrowserProvider(window.ethereum)
+
+        const getSigner = provider.getSigner()
+        const signer = await getSigner
+        const ethWallet = new Contract(contractAddressLocal, abi, signer)
+        const tx = await ethWallet.withdraw(ethers.parseEther(value))
+        const receipt = await tx.wait()
+
+        console.log(`${value.toString()} ETH Withdrawn!`)
         return receipt
     }
 
@@ -62,9 +77,41 @@ export default function EthWallet() {
         setIsLoading(false)
     }
 
+    const handleWithdrawSubmit = async (event) => {
+        event.preventDefault()
+        setIsLoading(true)
+        try {
+            await withdraw(withdrawAmount)
+
+            setSuccessMessage(`Successfully withdrawn ${withdrawAmount} ETH!`)
+            setWithdrawAmount("") // Optional: Reset input field after successful deposit
+            setTimeout(() => setSuccessMessage(""), 10000)
+        } catch (error) {
+            console.error("Error during withdraw: ", error)
+            setSuccessMessage("User Disconnected!")
+        }
+        setIsLoading(false)
+    }
+
+    const handleGetUserBalance = async (event) => {
+        event.preventDefault()
+        setIsLoading(true)
+        try {
+            await getUserBalance()
+
+            setSuccessMessage(`User Balance: ${userBalance} ETH!`)
+            setDepositAmount("") // Optional: Reset input field after successful deposit
+            setTimeout(() => setSuccessMessage(""), 10000)
+        } catch (error) {
+            console.error("User does not exist!", error)
+            setSuccessMessage("User does not exist!")
+        }
+        setIsLoading(false)
+    }
+
     return (
         <form onSubmit={handleDepositSubmit}>
-            <div className="flex flex-col p-10">
+            <div className="flex flex-col p-4">
                 <input
                     type="text"
                     value={depositAmount}
@@ -84,17 +131,14 @@ export default function EthWallet() {
                     Deposit
                 </button>
             </div>
-            <div className="flex justify-center">
+
+            <div className="flex flex-col justify-center">
                 <button
-                    onClick={getUserBalance}
+                    onClick={handleGetUserBalance}
                     className="flex justify-center px-4 py-2 text-2xl bg-sky-500 hover:bg-sky-400 text-white rounded-lg"
                 >
                     Get user balance
                 </button>
-                {""}
-                {userBalance && (
-                    <p>User Balance: {userBalance} ETH</p> // Display the balance
-                )}
             </div>
             {successMessage && (
                 <div className="flex justify-center px-4 py-2 text-2xl bg-violet-500 rounded-lg animate-fadeOut">
