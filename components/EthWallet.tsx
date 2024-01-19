@@ -2,16 +2,19 @@
 
 import { ethers, Contract, BrowserProvider } from "ethers"
 import { useWeb3ModalAccount } from "@web3modal/ethers/react"
-import abi from "../context/abi.json"
+import { contractAddresses, abi } from "../context"
 import React, { useState } from "react"
 import * as dotenv from "dotenv"
 dotenv.config()
 
-const contractAddress = "0x0597071313ae58624FFbbDAB8643aD96E27eD3bc"
-const contractAddressLocal = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+// const contractAddress = "0x0597071313ae58624FFbbDAB8643aD96E27eD3bc"
+// const contractAddressLocal = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 export default function EthWallet() {
     const { address, chainId, isConnected } = useWeb3ModalAccount()
+
+    const contractAddressLocal =
+        chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
     const [depositAmount, setDepositAmount] = useState("")
     const [withdrawAmount, setWithdrawAmount] = useState("")
@@ -110,28 +113,51 @@ export default function EthWallet() {
     }
 
     return (
-        <form onSubmit={handleDepositSubmit}>
-            <div className="flex flex-col p-4">
-                <input
-                    type="text"
-                    value={depositAmount}
-                    onChange={(e) => setDepositAmount(e.target.value)}
-                    className="text-black text-xl text-align-center py-2"
-                    placeholder="Deposit amount..."
-                />
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className={`px-4 pb-1 ${
-                        isLoading
-                            ? "bg-violet-600"
-                            : "bg-sky-500 hover:bg-sky-400"
-                    } text-white rounded-lg`}
-                >
-                    Deposit
-                </button>
-            </div>
-
+        <div>
+            <form onSubmit={handleDepositSubmit}>
+                <div className="flex flex-col p-4">
+                    <input
+                        type="text"
+                        value={depositAmount}
+                        onChange={(e) => setDepositAmount(e.target.value)}
+                        className="text-black text-xl text-align-center py-2"
+                        placeholder="Deposit amount..."
+                    />
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className={`px-4 pb-1 ${
+                            isLoading
+                                ? "bg-violet-600"
+                                : "bg-sky-500 hover:bg-sky-400"
+                        } text-white rounded-lg`}
+                    >
+                        Deposit
+                    </button>
+                </div>
+            </form>
+            <form onSubmit={handleWithdrawSubmit}>
+                <div className="flex flex-col p-4">
+                    <input
+                        type="text"
+                        value={withdrawAmount}
+                        onChange={(e) => setWithdrawAmount(e.target.value)}
+                        className="text-black text-xl text-align-center py-2"
+                        placeholder="Withdraw amount..."
+                    />
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className={`px-4 pb-1 ${
+                            isLoading
+                                ? "bg-violet-600"
+                                : "bg-sky-500 hover:bg-sky-400"
+                        } text-white rounded-lg`}
+                    >
+                        Withdraw
+                    </button>
+                </div>
+            </form>
             <div className="flex flex-col justify-center">
                 <button
                     onClick={handleGetUserBalance}
@@ -145,6 +171,6 @@ export default function EthWallet() {
                     {successMessage}
                 </div>
             )}
-        </form>
+        </div>
     )
 }
