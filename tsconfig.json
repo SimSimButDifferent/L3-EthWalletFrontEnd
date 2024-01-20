@@ -22,6 +22,13 @@
             "@/*": ["./*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "context/BalanceContext.js",
+        "context/BalanceContext.js"
+    ],
     "exclude": ["node_modules"]
 }

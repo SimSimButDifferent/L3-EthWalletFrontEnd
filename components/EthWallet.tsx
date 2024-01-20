@@ -3,12 +3,10 @@
 import { ethers, Contract, BrowserProvider } from "ethers"
 import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import { contractAddresses, abi } from "../context"
+
 import React, { useState } from "react"
 import * as dotenv from "dotenv"
 dotenv.config()
-
-// const contractAddress = "0x0597071313ae58624FFbbDAB8643aD96E27eD3bc"
-// const contractAddressLocal = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 export default function EthWallet() {
     const { address, chainId, isConnected } = useWeb3ModalAccount()

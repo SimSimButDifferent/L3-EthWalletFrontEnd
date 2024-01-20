@@ -1,9 +1,8 @@
 import { ReactNode } from "react"
+import { Web3ModalProvider } from "@/context/Web3Modal"
 import Header from "@/components/Header"
-
 import { Poppins } from "next/font/google"
 import "./globals.css"
-import { Web3ModalProvider } from "@/context/Web3Modal"
 
 const inter = Poppins({
     weight: ["200", "300", "400", "500", "600"],
