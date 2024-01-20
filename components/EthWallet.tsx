@@ -13,7 +13,7 @@ dotenv.config()
 export default function EthWallet() {
     const { address, chainId, isConnected } = useWeb3ModalAccount()
 
-    const contractAddressLocal =
+    const contractAddress =
         chainId in contractAddresses ? contractAddresses[chainId][0] : null
 
     const [depositAmount, setDepositAmount] = useState("")
@@ -28,7 +28,7 @@ export default function EthWallet() {
 
         const getSigner = provider.getSigner()
         const signer = await getSigner
-        const ethWallet = new Contract(contractAddressLocal, abi, signer)
+        const ethWallet = new Contract(contractAddress, abi, signer)
         const tx = await ethWallet.deposit({ value: ethers.parseEther(value) })
         const receipt = await tx.wait()
 
@@ -42,7 +42,7 @@ export default function EthWallet() {
 
         const getSigner = provider.getSigner()
         const signer = await getSigner
-        const ethWallet = new Contract(contractAddressLocal, abi, signer)
+        const ethWallet = new Contract(contractAddress, abi, signer)
         const tx = await ethWallet.withdraw(ethers.parseEther(value))
         const receipt = await tx.wait()
 
@@ -55,7 +55,7 @@ export default function EthWallet() {
 
         const getSigner = provider.getSigner()
         const signer = await getSigner
-        const ethWallet = new Contract(contractAddressLocal, abi, signer)
+        const ethWallet = new Contract(contractAddress, abi, signer)
         console.log(signer)
 
         const balance = await ethWallet.getUserBalance()
@@ -158,7 +158,7 @@ export default function EthWallet() {
                     </button>
                 </div>
             </form>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center pt-8">
                 <button
                     onClick={handleGetUserBalance}
                     className="flex justify-center px-4 py-2 text-2xl bg-sky-500 hover:bg-sky-400 text-white rounded-lg"

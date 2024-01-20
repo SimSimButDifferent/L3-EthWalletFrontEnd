@@ -1,4 +1,3 @@
-import Image from "next/image"
 import EthWallet from "@/components/EthWallet"
 
 export default function Home() {
