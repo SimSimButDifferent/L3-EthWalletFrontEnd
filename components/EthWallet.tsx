@@ -1,11 +1,18 @@
 "use client"
 
 import { ethers, Contract, BrowserProvider } from "ethers"
-import { useWeb3ModalAccount } from "@web3modal/ethers/react"
+import {
+    useWeb3ModalAccount,
+    useWeb3Modal,
+    useDisconnect,
+    useWeb3ModalError,
+} from "@web3modal/ethers/react"
 import { contractAddresses, abi } from "../context"
 
 import React, { useState } from "react"
 import * as dotenv from "dotenv"
+import { connect } from "http2"
+import Header from "./Header"
 dotenv.config()
 
 export default function EthWallet() {
@@ -101,7 +108,7 @@ export default function EthWallet() {
             await getUserBalance()
 
             setSuccessMessage(`User Balance: ${userBalance} ETH!`)
-            setDepositAmount("") // Optional: Reset input field after successful deposit
+
             setTimeout(() => setSuccessMessage(""), 10000)
         } catch (error) {
             console.error("User does not exist!", error)
@@ -111,8 +118,13 @@ export default function EthWallet() {
     }
 
     return (
-        <div>
+        <div className="">
             <form onSubmit={handleDepositSubmit}>
+                <div className="p-4">
+                    <h1 className="text-6xl text-center rounded-lg border border-transparent px-5 py-4 transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">
+                        Eth Wallet App
+                    </h1>
+                </div>
                 <div className="flex flex-col p-4">
                     <input
                         type="text"
