@@ -1385,7 +1385,7 @@
     "@web3modal/wallet" "3.5.7"
     valtio "1.11.2"
 
-"@web3modal/ethers@^3.5.4":
+"@web3modal/ethers@3.5.7":
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@web3modal/ethers/-/ethers-3.5.7.tgz#8af0d140c5d1c0f0fc2e326738a54df7a6d21799"
   integrity sha512-PozpYFx5AAX8M6nNSbw4TsRCFrYSDSD93JAkzD9L+cf7jDPwWQST29aXIcyyC8jBVrHoWOgj3o7iCxTSgrSI3w==

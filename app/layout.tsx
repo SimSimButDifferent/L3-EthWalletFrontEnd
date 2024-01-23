@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from "react"
 import { Web3ModalProvider } from "@/context/Web3Modal"
+import { BalanceProvider } from "@/context/BalanceContext"
 import Header from "@/components/Header"
 import EthWallet from "@/components/EthWallet"
 import { Poppins } from "next/font/google"

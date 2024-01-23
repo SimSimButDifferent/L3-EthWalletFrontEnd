@@ -28,7 +28,8 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "context/BalanceContext.js",
-        "context/BalanceContext.js"
+        "context/BalanceContext.js",
+        "app/layout.jsx"
     ],
     "exclude": ["node_modules"]
 }

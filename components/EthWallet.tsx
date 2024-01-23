@@ -1,22 +1,16 @@
 "use client"
 
 import { ethers, Contract, BrowserProvider } from "ethers"
-import {
-    useWeb3ModalAccount,
-    useWeb3Modal,
-    useDisconnect,
-    useWeb3ModalError,
-} from "@web3modal/ethers/react"
+import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import { contractAddresses, abi } from "../context"
-
+import { useBalance } from "@/context/BalanceContext"
 import React, { useState } from "react"
 import * as dotenv from "dotenv"
-import { connect } from "http2"
-import Header from "./Header"
 dotenv.config()
 
-export default function EthWallet() {
+const EthWallet: React.FC = () => {
     const { address, chainId, isConnected } = useWeb3ModalAccount()
+    const balanceContext = useBalance()
 
     const contractAddress =
         chainId in contractAddresses ? contractAddresses[chainId][0] : null
@@ -63,17 +57,24 @@ export default function EthWallet() {
         const ethWallet = new Contract(contractAddress, abi, signer)
         console.log(signer)
 
-        const balance = await ethWallet.getUserBalance()
-        console.log(balance)
+        const userBalance = await ethWallet.getUserBalance()
+        console.log(userBalance)
 
-        setUserBalance(ethers.formatEther(balance)) // Format the balance for display
+        // setUserBalance(ethers.formatEther(userBalance)) // Format the balance for display
+
+        // return userBalance
     }
 
-    const handleDepositSubmit = async (event) => {
+    const handleDepositSubmit = async (
+        event: React.FormEvent<HTMLFormElement>,
+    ) => {
         event.preventDefault()
         setIsLoading(true)
         try {
             await deposit(depositAmount)
+            //if (balanceContext) {
+            //await balanceContext.updateBalance()
+            //}
 
             setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`)
             setDepositAmount("") // Optional: Reset input field after successful deposit
@@ -106,6 +107,7 @@ export default function EthWallet() {
         setIsLoading(true)
         try {
             await getUserBalance()
+            //console.log(await balanceContext.updateBalance())
 
             setSuccessMessage(`User Balance: ${userBalance} ETH!`)
 
@@ -184,3 +186,5 @@ export default function EthWallet() {
         </div>
     )
 }
+
+export default EthWallet
