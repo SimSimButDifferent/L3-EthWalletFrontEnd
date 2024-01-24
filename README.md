@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+yarn run dev
 
-## Getting Started
+yarn hardhat node
 
-First, run the development server:
+connect to sepolia testnet or localhost!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Lesson 3: Functions and Modifiers in Solidity
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Objective:** To understand how to write and use functions in Solidity, and to learn about function modifiers for enforcing certain conditions and managing access control in smart contracts.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Part 1: Functions in Solidity
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Function Declaration and Types**:
+    
+    - Understand the syntax for declaring functions.
+    - Different types of functions: `public`, `private`, `internal`, and `external`.
+- **Return Values and Visibility**:
+    
+    - How to define return values for functions.
+    - Understand the implications of function visibility.
+- **Function Modifiers**:
+    
+    - Usage of `view`, `pure`, and state-changing functions.
+- **Function Parameters**:
+    
+    - Passing parameters to functions.
+    - Using `memory` and `storage` keywords for complex data types.
+- **Example: Creating a Function**
+    
+    solidityCopy code
+    
+    `pragma solidity ^0.8.0;  contract MyContract {     uint public count = 0;      function increment() public {         count += 1;     }      function getCount() public view returns (uint) {         return count;     } }`
+    
 
-## Learn More
+#### Part 2: Modifiers in Solidity
 
-To learn more about Next.js, take a look at the following resources:
+- **Understanding Modifiers**:
+    
+    - Purpose of modifiers in Solidity.
+    - Writing custom modifiers to enforce conditions.
+- **Common Use Cases**:
+    
+    - Restricting access to certain functions.
+    - Validating inputs or conditions before executing function logic.
+- **Example: Using a Modifier**
+    
+    solidityCopy code
+    
+    `pragma solidity ^0.8.0;  contract MyContract {     address public owner;      constructor() {         owner = msg.sender;     }      modifier onlyOwner() {         require(msg.sender == owner, "Not the owner");         _;     }      function changeOwner(address newOwner) public onlyOwner {         owner = newOwner;     } }`
+    
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Assignments and Practical Exercises
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Assignment 1**:
 
-## Deploy on Vercel
+- Research and write a brief explanation of how and why `view` and `pure` modifiers are used in Solidity functions.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+**Exercise 1**:
+
+- Create a smart contract with a few functions demonstrating different visibility levels (`public`, `private`, `internal`, `external`) and return values.
+
+**Exercise 2**:
+
+- Write a contract that includes a custom modifier. Use this modifier to restrict access to one of the contract's functions.
+
+For this exercise I built a simple EthWallet contract. I made sure I used the built in modifiers specified in the brief, as well as a couple of custom modifiers.
+
+---
+
+This lesson will help you understand how to structure the logic within your smart contracts using functions and modifiers. These are key concepts in Solidity and are essential for writing secure and efficient smart contracts. Once you've completed this lesson, you'll have a deeper understanding of how to control access and enforce specific logic flows in your smart contracts.
