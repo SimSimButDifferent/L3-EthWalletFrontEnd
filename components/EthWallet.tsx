@@ -3,14 +3,14 @@
 import { ethers, Contract, BrowserProvider } from "ethers"
 import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import { contractAddresses, abi } from "../context"
-import { useBalance } from "@/context/BalanceContext"
+
 import React, { useState } from "react"
 import * as dotenv from "dotenv"
+
 dotenv.config()
 
 const EthWallet: React.FC = () => {
     const { address, chainId, isConnected } = useWeb3ModalAccount()
-    const balanceContext = useBalance()
 
     const contractAddress =
         chainId in contractAddresses ? contractAddresses[chainId][0] : null
@@ -18,7 +18,7 @@ const EthWallet: React.FC = () => {
     const [depositAmount, setDepositAmount] = useState("")
     const [withdrawAmount, setWithdrawAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
-    const [userBalance, setUserBalance] = useState("")
+
     const [isLoading, setIsLoading] = useState(false)
 
     async function deposit(value: any) {
@@ -59,10 +59,6 @@ const EthWallet: React.FC = () => {
 
         const userBalance = await ethWallet.getUserBalance()
         console.log(userBalance)
-
-        // setUserBalance(ethers.formatEther(userBalance)) // Format the balance for display
-
-        // return userBalance
     }
 
     const handleDepositSubmit = async (
@@ -72,9 +68,6 @@ const EthWallet: React.FC = () => {
         setIsLoading(true)
         try {
             await deposit(depositAmount)
-            //if (balanceContext) {
-            //await balanceContext.updateBalance()
-            //}
 
             setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`)
             setDepositAmount("") // Optional: Reset input field after successful deposit
@@ -106,8 +99,7 @@ const EthWallet: React.FC = () => {
         event.preventDefault()
         setIsLoading(true)
         try {
-            await getUserBalance()
-            //console.log(await balanceContext.updateBalance())
+            const userBalance = await getUserBalance()
 
             setSuccessMessage(`User Balance: ${userBalance} ETH!`)
 

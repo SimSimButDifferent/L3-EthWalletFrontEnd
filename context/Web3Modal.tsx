@@ -20,7 +20,6 @@ const sepolia = {
     currency: "ETH",
     explorerUrl: "https://sepolia.etherscan.io",
     rpcUrl: "https://rpc.sepolia.org",
-
 }
 
 const localhost = {

@@ -1,8 +1,6 @@
-"use client"
-
-import { ReactNode, useState } from "react"
+import { ReactNode } from "react"
 import { Web3ModalProvider } from "@/context/Web3Modal"
-import { BalanceProvider } from "@/context/BalanceContext"
+
 import Header from "@/components/Header"
 import EthWallet from "@/components/EthWallet"
 import { Poppins } from "next/font/google"
@@ -13,9 +11,12 @@ const inter = Poppins({
     subsets: ["latin"],
 })
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-    const [balance, setBalance] = useState("")
+export const metadata = {
+    title: "EthWalletApp",
+    description: "Simple EthWalletApp by simsimbutdifferent",
+}
 
+export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className="flex flex-col justify-between bg-[url(../public/Space-Background.jpg)]">
