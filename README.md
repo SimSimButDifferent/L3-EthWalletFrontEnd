@@ -1,6 +1,6 @@
-```yarn run dev
+yarn run dev
 
-yarn hardhat node```
+yarn hardhat node
 
 connect to sepolia testnet or localhost!
 
