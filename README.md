@@ -13,6 +13,8 @@ https://ethwalletapp.on.fleek.co/
 
 Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3bc](https://sepolia.etherscan.io/address/0x0597071313ae58624ffbbdab8643ad96e27ed3bc)
 
+## Follow along with the course below!
+
 ### Lesson 3: Functions and Modifiers in Solidity
 
 **Objective:** To understand how to write and use functions in Solidity, and to learn about function modifiers for enforcing certain conditions and managing access control in smart contracts.
