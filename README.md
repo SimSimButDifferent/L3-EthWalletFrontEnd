@@ -1,8 +1,17 @@
-yarn run dev
+## To run locally:
 
-yarn hardhat node
+```yarn run dev```
 
-connect to sepolia testnet or localhost!
+#### On another terminal...
+
+```yarn hardhat node```
+
+### Built with
+NextJs, Typescript, ethers, web3modal and deployed to ipfs with fleek!
+
+https://ethwalletapp.on.fleek.co/
+
+Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3bc](https://sepolia.etherscan.io/address/0x0597071313ae58624ffbbdab8643ad96e27ed3bc)
 
 ### Lesson 3: Functions and Modifiers in Solidity
 
