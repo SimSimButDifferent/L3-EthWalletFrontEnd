@@ -40,7 +40,22 @@ Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3
     
     solidityCopy code
     
-    `pragma solidity ^0.8.0;  contract MyContract {     uint public count = 0;      function increment() public {         count += 1;     }      function getCount() public view returns (uint) {         return count;     } }`
+    ```solidity
+  pragma solidity ^0.8.0;
+    
+    contract MyContract {
+    
+        uint public count = 0;
+    
+        function increment() public {
+            count += 1;
+        }
+    
+        function getCount() public view returns (uint) {
+            return count;
+        }
+    }
+    ```
     
 
 #### Part 2: Modifiers in Solidity
@@ -57,7 +72,27 @@ Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3
     
     solidityCopy code
     
-    `pragma solidity ^0.8.0;  contract MyContract {     address public owner;      constructor() {         owner = msg.sender;     }      modifier onlyOwner() {         require(msg.sender == owner, "Not the owner");         _;     }      function changeOwner(address newOwner) public onlyOwner {         owner = newOwner;     } }`
+    ```solidity
+  pragma solidity ^0.8.0;
+    
+    contract MyContract {
+    
+        address public owner;
+
+        constructor() {
+            owner = msg.sender;
+        }
+    
+        modifier onlyOwner() {
+            require(msg.sender == owner, "Not the owner");
+        _;
+        }
+        
+        function changeOwner(address newOwner) public onlyOwner {
+            owner = newOwner;
+        }
+    }
+    ```
     
 
 #### Assignments and Practical Exercises
