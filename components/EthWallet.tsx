@@ -174,8 +174,10 @@ const EthWallet: React.FC = () => {
                 </button>
             </div>
             {successMessage && (
-                <div className="flex justify-center px-4 py-2 text-2xl bg-violet-500 rounded-lg animate-fadeOut">
-                    {successMessage}
+                <div className="flex items-center justify-center pt-10">
+                    <div className="flex justify-center px-4 py-2 text-2xl bg-purple-900 rounded-lg max-w-fit font-light animate-fadeOut">
+                        {successMessage}
+                    </div>
                 </div>
             )}
         </div>

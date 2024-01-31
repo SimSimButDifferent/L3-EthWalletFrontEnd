@@ -16,7 +16,7 @@ const config: Config = {
             animation: {
                 fadeInOut: "fadeInOut 6s ease-in-out",
                 fadeIn: "fadeIn 10s forwards",
-                fadeOut: "fadeOut 10s backwards 1",
+                fadeOut: "fadeOut 20s backwards 1",
             },
             keyframes: {
                 fadeInOut: {
