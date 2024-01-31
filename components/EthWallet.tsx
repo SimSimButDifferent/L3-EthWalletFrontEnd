@@ -18,7 +18,6 @@ const EthWallet: React.FC = () => {
     const [depositAmount, setDepositAmount] = useState("")
     const [withdrawAmount, setWithdrawAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
-    const [userBalance, setUserBalance] = useState("")
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -59,10 +58,8 @@ const EthWallet: React.FC = () => {
         console.log(signer)
 
         const balance = await ethWallet.getUserBalance()
-        console.log(balance)
 
-        setUserBalance(ethers.formatEther(balance.toString()))
-        return userBalance
+        return balance.toString()
     }
 
     const handleDepositSubmit = async (
@@ -103,9 +100,11 @@ const EthWallet: React.FC = () => {
         event.preventDefault()
         setIsLoading(true)
         try {
-            await getUserBalance()
+            const balance = await getUserBalance()
 
-            setSuccessMessage(`User Balance: ${userBalance} ETH!`)
+            setSuccessMessage(
+                `User Balance: ${ethers.formatEther(balance)} ETH!`,
+            )
 
             setTimeout(() => setSuccessMessage(""), 10000)
         } catch (error) {
