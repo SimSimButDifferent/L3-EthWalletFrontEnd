@@ -34,7 +34,7 @@ const localhost = {
 const metadata = {
     name: "Eth Wallet",
     description: "Simple Eth Wallet app created by Simeon Campbell",
-    url: "https://mywebsite.com",
+    url: "ethwalletapp.on.fleek.co",
     icons: ["https://avatars.mywebsite.com/"],
 }
 
