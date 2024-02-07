@@ -13,7 +13,10 @@ https://ethwalletapp.on.fleek.co/
 
 Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3bc](https://sepolia.etherscan.io/address/0x0597071313ae58624ffbbdab8643ad96e27ed3bc)
 
+![image](https://github.com/SimSimButDifferent/L3-EthWalletFrontEnd/assets/88177427/f888da39-3fe4-45ab-b067-ab120c51024b)
+
 ## Follow along with the course below!
+
 
 ### Lesson 3: Functions and Modifiers in Solidity
 
