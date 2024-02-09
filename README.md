@@ -12,7 +12,7 @@ NextJs, Typescript, ethers, web3modal and deployed to ipfs with fleek!
 
 https://ethwalletapp.on.fleek.co/
 
-Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3bc](https://sepolia.etherscan.io/address/0x0597071313ae58624ffbbdab8643ad96e27ed3bc)
+Contract deployed on sepolia testnet - [0xAd2043E811Fd4FB67D2e6b063678F30627b313E3](https://sepolia.etherscan.io/address/0xAd2043E811Fd4FB67D2e6b063678F30627b313E3)
 
 ![image](https://github.com/SimSimButDifferent/L3-EthWalletFrontEnd/assets/88177427/f888da39-3fe4-45ab-b067-ab120c51024b)
 
@@ -37,6 +37,7 @@ Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3
     -   Using `memory` and `storage` keywords for complex data types.
 -   **Example: Creating a Function**
     solidityCopy code
+
     ```solidity
     pragma solidity ^0.8.0;
 

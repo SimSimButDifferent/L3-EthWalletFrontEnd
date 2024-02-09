@@ -4,35 +4,55 @@
         "name": "EthWallet_InsufficientContractBalance",
         "type": "error"
     },
-    {
-        "inputs": [],
-        "name": "EthWallet__DepositMustBeAboveZero",
-        "type": "error"
-    },
-    {
-        "inputs": [],
-        "name": "EthWallet__WalletIsEmpty",
-        "type": "error"
-    },
+    { "inputs": [], "name": "EthWallet__WalletIsEmpty", "type": "error" },
     {
         "inputs": [],
         "name": "EthWallet__WithdrawalExceedsUserBalance",
         "type": "error"
     },
     {
-        "inputs": [],
-        "name": "EthWallet__WithdrawalMustBeAboveZero",
-        "type": "error"
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "depositer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "DepositSuccess",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "withdrawer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "WithdrawSuccess",
+        "type": "event"
     },
     {
         "inputs": [],
         "name": "dailyWithdrawalLimit",
         "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -48,11 +68,7 @@
         "inputs": [],
         "name": "getUserBalance",
         "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
