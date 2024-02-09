@@ -1,10 +1,37 @@
-## To run locally:
+## Note
 
-`yarn run dev`
+For lesson 4 Code, switch to L4 branch 🌿
 
-#### On another terminal...
+## Directions for use
 
-`yarn hardhat node`
+To play around with this code locally run the following commands in your local terminal in order:
+
+```
+git clone https://github.com/SimSimButDifferent/L3-L4-EthWalletFrontEnd.git
+cd L3-L4-EthWalletFrontEnd
+yarn
+yarn run dev
+```
+
+Then split the terminal and run the below code in the other half:
+
+```
+cd ..
+git clone https://github.com/SimSimButDifferent/L3-L4-EthWallet.git
+cd L3-L4-EthWallet
+yarn
+yarn hardhat node
+```
+
+Finally, in the L3-L4-Ethwallet folder, deploy to the hardhat node using:
+
+```
+yarn hardhat run scripts/deploy.js --network localhost
+```
+
+paste: 'localhost:3000' into you browser and you can run the app locally on your computer.
+
+
 
 ### Built with
 
@@ -12,9 +39,11 @@ NextJs, Typescript, ethers, web3modal and deployed to ipfs with fleek!
 
 https://ethwalletapp.on.fleek.co/
 
-Contract deployed on sepolia testnet - [0xAd2043E811Fd4FB67D2e6b063678F30627b313E3](https://sepolia.etherscan.io/address/0xAd2043E811Fd4FB67D2e6b063678F30627b313E3)
+Updated L4 Contract deployed on sepolia testnet - [0xAd2043E811Fd4FB67D2e6b063678F30627b313E3](https://sepolia.etherscan.io/address/0xAd2043E811Fd4FB67D2e6b063678F30627b313E3)
 
-![image](https://github.com/SimSimButDifferent/L3-EthWalletFrontEnd/assets/88177427/f888da39-3fe4-45ab-b067-ab120c51024b)
+![image](https://github.com/SimSimButDifferent/L3-L4-EthWalletFrontEnd/assets/88177427/5de5c452-f619-461b-97d1-d4e2562e8df5)
+
+
 
 ## Follow along with the course below!
 
