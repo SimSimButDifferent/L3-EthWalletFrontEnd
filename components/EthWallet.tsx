@@ -4,7 +4,7 @@ import { ethers, Contract, BrowserProvider } from "ethers"
 import { useWeb3ModalAccount } from "@web3modal/ethers/react"
 import { contractAddresses, abi } from "../context"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import * as dotenv from "dotenv"
 
 dotenv.config()
@@ -18,7 +18,7 @@ const EthWallet: React.FC = () => {
     const [depositAmount, setDepositAmount] = useState("")
     const [withdrawAmount, setWithdrawAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
-
+    const [userBalance, setUserBalance] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     async function deposit(value: any) {
@@ -49,7 +49,7 @@ const EthWallet: React.FC = () => {
         return receipt
     }
 
-    async function getUserBalance() {
+    const getUserBalance = async () => {
         const provider = new BrowserProvider(window.ethereum)
 
         const getSigner = provider.getSigner()
@@ -58,6 +58,7 @@ const EthWallet: React.FC = () => {
         console.log(signer)
 
         const balance = await ethWallet.getUserBalance()
+        // setUserBalance(ethers.formatEther(balance).toString())
 
         return balance.toString()
     }
@@ -71,6 +72,9 @@ const EthWallet: React.FC = () => {
             await deposit(depositAmount)
 
             setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`)
+            const balance = await getUserBalance()
+            setUserBalance(ethers.formatEther(balance))
+
             setDepositAmount("") // Optional: Reset input field after successful deposit
             setTimeout(() => setSuccessMessage(""), 10000)
         } catch (error) {
@@ -87,6 +91,9 @@ const EthWallet: React.FC = () => {
             await withdraw(withdrawAmount)
 
             setSuccessMessage(`Successfully withdrawn ${withdrawAmount} ETH!`)
+            const balance = await getUserBalance()
+            setUserBalance(ethers.formatEther(balance))
+
             setWithdrawAmount("") // Optional: Reset input field after successful deposit
             setTimeout(() => setSuccessMessage(""), 10000)
         } catch (error) {
@@ -102,17 +109,19 @@ const EthWallet: React.FC = () => {
         try {
             const balance = await getUserBalance()
 
-            setSuccessMessage(
-                `User Balance: ${ethers.formatEther(balance)} ETH!`,
-            )
+            setUserBalance(ethers.formatEther(balance))
 
-            setTimeout(() => setSuccessMessage(""), 10000)
+            setTimeout(() => 10000)
         } catch (error) {
             console.error("User does not exist!", error)
             setSuccessMessage("User does not exist!")
         }
         setIsLoading(false)
     }
+
+    useEffect(() => {
+        handleGetUserBalance
+    }, [])
 
     return (
         <div className="">
@@ -165,14 +174,12 @@ const EthWallet: React.FC = () => {
                     </button>
                 </div>
             </form>
-            <div className="clickbutton flex flex-col justify-center">
-                <button
-                    onClick={handleGetUserBalance}
-                    className="flex justify-center px-4 py-2 rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 hover:bg-transparent"
-                >
-                    Get user balance
-                </button>
+            <div className="flex justify-center pt-4">
+                <div className="flex p-4 text-2xl font-light rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">
+                    User Contract Balance: {userBalance} ETH
+                </div>
             </div>
+
             {successMessage && (
                 <div className="flex items-center justify-center pt-10">
                     <div className="flex justify-center px-4 py-2 text-2xl rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 animate-fadeOut">
