@@ -136,7 +136,7 @@ const EthWallet: React.FC = () => {
                         className={`px-4 pb-1 ${
                             isLoading
                                 ? "bg-violet-600"
-                                : "bg-sky-500 hover:bg-sky-400"
+                                : "rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 hover:bg-transparent"
                         } text-white rounded-lg`}
                     >
                         Deposit
@@ -158,24 +158,24 @@ const EthWallet: React.FC = () => {
                         className={`px-4 pb-1 ${
                             isLoading
                                 ? "bg-violet-600"
-                                : "bg-sky-500 hover:bg-sky-400"
+                                : "rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 hover:bg-transparent"
                         } text-white rounded-lg`}
                     >
                         Withdraw
                     </button>
                 </div>
             </form>
-            <div className="flex flex-col justify-center pt-8">
+            <div className="clickbutton flex flex-col justify-center">
                 <button
                     onClick={handleGetUserBalance}
-                    className="flex justify-center px-4 py-2 text-2xl bg-sky-500 hover:bg-sky-400 text-white rounded-lg"
+                    className="flex justify-center px-4 py-2 rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 hover:bg-transparent"
                 >
                     Get user balance
                 </button>
             </div>
             {successMessage && (
                 <div className="flex items-center justify-center pt-10">
-                    <div className="flex justify-center px-4 py-2 text-2xl bg-purple-900 rounded-lg max-w-fit font-light animate-fadeOut">
+                    <div className="flex justify-center px-4 py-2 text-2xl rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30 animate-fadeOut">
                         {successMessage}
                     </div>
                 </div>

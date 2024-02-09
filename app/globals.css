@@ -37,3 +37,7 @@ input {
     text-align: center;
     font-weight: 300;
 }
+
+clickbutton {
+    @apply border-gray-300;
+}

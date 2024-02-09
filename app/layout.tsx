@@ -19,11 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
-            <body className="flex flex-col justify-between bg-[url(../public/Space-Background.jpg)] bg-cover bg-fixed">
+            <body className="flex flex-col bg-[url(../public/Space-Background.jpg)] bg-cover bg-fixed">
                 <Web3ModalProvider>
                     <Header />
                     <EthWallet />
-                    {children}
+                    <div className="flex justify-center">{children}</div>
                 </Web3ModalProvider>
             </body>
         </html>
