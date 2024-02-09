@@ -1,6 +1,9 @@
 ## Note
+For lesson 3 Code, switch to main branch 🌿
 
-For lesson 4 Code, switch to L4 branch 🌿
+## Lesson 4 updates: 
+
+- Added a live user contract balance, that updates when functions are called.
 
 ## Directions for use
 
@@ -47,93 +50,90 @@ Updated L4 Contract deployed on sepolia testnet - [0xAd2043E811Fd4FB67D2e6b06367
 
 ## Follow along with the course below!
 
-### Lesson 3: Functions and Modifiers in Solidity
+# Lesson 4: Error Handling and Events in Solidity
+**Objective:** Understand how to handle errors and emit events in Solidity, which are critical for smart contract reliability and interaction with the front end.
 
-**Objective:** To understand how to write and use functions in Solidity, and to learn about function modifiers for enforcing certain conditions and managing access control in smart contracts.
+## Part 1: Error Handling in Solidity
+**Error Handling Mechanisms:**
 
-#### Part 1: Functions in Solidity
+**require:** Used to check for conditions and revert the transaction if the condition is not met. It reverts all changes made to the state.
 
--   **Function Declaration and Types**:
-    -   Understand the syntax for declaring functions.
-    -   Different types of functions: `public`, `private`, `internal`, and `external`.
--   **Return Values and Visibility**:
-    -   How to define return values for functions.
-    -   Understand the implications of function visibility.
--   **Function Modifiers**:
-    -   Usage of `view`, `pure`, and state-changing functions.
--   **Function Parameters**:
-    -   Passing parameters to functions.
-    -   Using `memory` and `storage` keywords for complex data types.
--   **Example: Creating a Function**
-    solidityCopy code
+**revert:** Provides a way to trigger an exception and revert the transaction, often with a custom error message.
 
-    ```solidity
-    pragma solidity ^0.8.0;
+**assert:** Used for internal checks as a way to prevent conditions that should never be possible. It consumes all gas when failed.
 
-    contract MyContract {
+**When to Use Each:**
 
-        uint public count = 0;
+Use require for input validation or to enforce proper conditions before execution.
 
-        function increment() public {
-            count += 1;
-        }
+Use revert for more complex condition checks, especially where a specific error message is helpful.
 
-        function getCount() public view returns (uint) {
-            return count;
-        }
+Use assert for invariants and to check for conditions that indicate a bug.
+
+### Example: Error Handling
+
+```solidity
+pragma solidity ^0.8.0;
+contract ErrorHandling { mapping(address => uint) public balance;
+
+    function deposit() public payable {
+        require(msg.value > 0, "Deposit amount must be greater than 0");
+        balance[msg.sender] += msg.value;
     }
-    ```
-
-#### Part 2: Modifiers in Solidity
-
--   **Understanding Modifiers**:
-    -   Purpose of modifiers in Solidity.
-    -   Writing custom modifiers to enforce conditions.
--   **Common Use Cases**:
-    -   Restricting access to certain functions.
-    -   Validating inputs or conditions before executing function logic.
--   **Example: Using a Modifier**
-
-    solidityCopy code
-
-    ```solidity
-    pragma solidity ^0.8.0;
-
-    contract MyContract {
-
-        address public owner;
-
-        constructor() {
-            owner = msg.sender;
-        }
-
-        modifier onlyOwner() {
-            require(msg.sender == owner, "Not the owner");
-        _;
-        }
-
-        function changeOwner(address newOwner) public onlyOwner {
-            owner = newOwner;
-        }
+    
+    function withdraw(uint amount) public {
+        require(amount <= balance[msg.sender], "Insufficient balance");
+        balance[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
     }
-    ```
+}
+```
 
-#### Assignments and Practical Exercises
+## Part 2: Events in Solidity
+**Understanding Events:**
 
-**Assignment 1**:
+Events allow logging to the Ethereum blockchain.
 
--   Research and write a brief explanation of how and why `view` and `pure` modifiers are used in Solidity functions.
+Useful for tracking contract activity and interacting with the contract's front-end.
 
-**Exercise 1**:
+**Declaring and Emitting Events:**
 
--   Create a smart contract with a few functions demonstrating different visibility levels (`public`, `private`, `internal`, `external`) and return values.
+How to declare an event and emit it in functions.
 
-**Exercise 2**:
+Example: Using Events
 
--   Write a contract that includes a custom modifier. Use this modifier to restrict access to one of the contract's functions.
+```solidity
+pragma solidity ^0.8.0;
 
-For this exercise I built a simple EthWallet contract. I made sure I used the built in modifiers specified in the brief, as well as a couple of custom modifiers.
+contract EventExample { 
+    event Deposit(address indexed sender, uint amount); 
+    event Withdrawal(address indexed receiver, uint amount);
 
----
+    mapping(address => uint) public balance;
+    
+    function deposit() public payable {
+        emit Deposit(msg.sender, msg.value);
+        balance[msg.sender] += msg.value;
+    }
+    
+    function withdraw(uint amount) public {
+        require(amount <= balance[msg.sender], "Insufficient balance");
+        emit Withdrawal(msg.sender, amount);
+        balance[msg.sender] -= amount;
+        payable(msg.sender).transfer(amount);
+    }
+}
+```
 
-This lesson will help you understand how to structure the logic within your smart contracts using functions and modifiers. These are key concepts in Solidity and are essential for writing secure and efficient smart contracts. Once you've completed this lesson, you'll have a deeper understanding of how to control access and enforce specific logic flows in your smart contracts.
+# Assignments and Practical Exercises
+
+### Assignment 1:
+Write a brief essay explaining the differences between require, revert, and assert, and provide scenarios where each is appropriate.
+
+### Exercise 1:
+Create a smart contract implementing a simple banking system with functions for deposit and withdrawal. Use require statements for validating conditions.
+
+### Exercise 2:
+Modify the above contract to include events for each deposit and withdrawal action. Test the contract to ensure that events are emitted correctly.
+
+This lesson will help you understand how to make your smart contracts more reliable and informative through proper error handling and the use of events. These concepts are essential for creating robust and user-friendly smart contracts. Once you've completed this lesson, you'll have a deeper understanding of how to manage errors and provide feedback to users and front-end applications.
