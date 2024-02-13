@@ -18,7 +18,7 @@ const EthWallet: React.FC = () => {
     const [depositAmount, setDepositAmount] = useState("")
     const [withdrawAmount, setWithdrawAmount] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
-    const [userBalance, setUserBalance] = useState("")
+    const [userBalance, setUserBalance] = useState("Loading...")
     const [isLoading, setIsLoading] = useState(false)
 
     async function deposit(value: any) {
@@ -58,7 +58,8 @@ const EthWallet: React.FC = () => {
         console.log(signer)
 
         const balance = await ethWallet.getUserBalance()
-        // setUserBalance(ethers.formatEther(balance).toString())
+
+        setUserBalance(ethers.formatEther(balance))
 
         return balance.toString()
     }
@@ -73,7 +74,13 @@ const EthWallet: React.FC = () => {
 
             setSuccessMessage(`Successfully deposited ${depositAmount} ETH!`)
             const balance = await getUserBalance()
-            setUserBalance(ethers.formatEther(balance))
+            if (balance == 0) {
+                setUserBalance("Wallet empty!")
+            } else {
+                setUserBalance(
+                    `User Contract Balance: ${ethers.formatEther(balance)} ETH`,
+                )
+            }
 
             setDepositAmount("") // Optional: Reset input field after successful deposit
             setTimeout(() => setSuccessMessage(""), 10000)
@@ -92,7 +99,13 @@ const EthWallet: React.FC = () => {
 
             setSuccessMessage(`Successfully withdrawn ${withdrawAmount} ETH!`)
             const balance = await getUserBalance()
-            setUserBalance(ethers.formatEther(balance))
+            if (balance == 0) {
+                setUserBalance("Wallet Empty!")
+            } else {
+                setUserBalance(
+                    `User Contract Balance: ${ethers.formatEther(balance)} ETH`,
+                )
+            }
 
             setWithdrawAmount("") // Optional: Reset input field after successful deposit
             setTimeout(() => setSuccessMessage(""), 10000)
@@ -109,7 +122,13 @@ const EthWallet: React.FC = () => {
         try {
             const balance = await getUserBalance()
 
-            setUserBalance(ethers.formatEther(balance))
+            if (balance == 0) {
+                setUserBalance("Wallet Empty!")
+            } else {
+                setUserBalance(
+                    `User Contract Balance: ${ethers.formatEther(balance)} ETH`,
+                )
+            }
 
             setTimeout(() => 10000)
         } catch (error) {
@@ -118,15 +137,34 @@ const EthWallet: React.FC = () => {
         }
         setIsLoading(false)
     }
-
     useEffect(() => {
-        handleGetUserBalance
-    }, [])
+        const fetchUserBalance = async () => {
+            try {
+                const balance = await getUserBalance()
+                if (balance == 0) {
+                    setUserBalance("Wallet Empty!")
+                } else {
+                    setUserBalance(
+                        `User Contract Balance: ${ethers.formatEther(
+                            balance,
+                        )} ETH`,
+                    )
+                }
+            } catch (error) {
+                console.error("Failed to fetch user balance: ", error)
+            }
+        }
+        if (isConnected) {
+            fetchUserBalance()
+        } else {
+            setUserBalance("Connect wallet!")
+        }
+    }, [isConnected])
 
     return (
         <div className="">
             <form onSubmit={handleDepositSubmit}>
-                <div className="p-4">
+                <div className="flex justify-center p-4">
                     <h1 className="text-6xl text-center rounded-lg border border-transparent px-5 py-4 transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">
                         Eth Wallet App
                     </h1>
@@ -176,7 +214,7 @@ const EthWallet: React.FC = () => {
             </form>
             <div className="flex justify-center pt-4">
                 <div className="flex p-4 text-2xl font-light rounded-lg border border-transparent transition-colors border-neutral-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30">
-                    User Contract Balance: {userBalance} ETH
+                    {userBalance}
                 </div>
             </div>
 
