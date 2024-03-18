@@ -14,6 +14,22 @@ const mainnet = {
     rpcUrl: "https://cloudflare-eth.com",
 }
 
+const zksync = {
+    chainId: 324,
+    name: "zkSync",
+    currency: "ETH",
+    explorerUrl: "https://explorer.zksync.io",
+    rpcUrl: "https://zksync2-mainnet.zksync.io",
+}
+
+const zksynctestnet = {
+    chainId: 300,
+    name: "zkSync Sepolia Testnet",
+    currency: "ETH",
+    explorerUrl: "https://sepolia.explorer.zksync.io",
+    rpcUrl: "https://zksync-era-sepolia.blockpi.network/v1/rpc/public",
+}
+
 const sepolia = {
     chainId: 11155111,
     name: "Sepolia",
@@ -40,7 +56,7 @@ const metadata = {
 
 createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
-    chains: [mainnet, sepolia, localhost],
+    chains: [mainnet, zksync, zksynctestnet, sepolia, localhost],
     projectId,
 })
 

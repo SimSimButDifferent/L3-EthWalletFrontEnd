@@ -20,7 +20,8 @@
         "react": "^18",
         "react-dom": "^18",
         "viem": "1.21.4",
-        "wagmi": "1.4.13"
+        "wagmi": "1.4.13",
+        "zksync-ethers": "^6.5.0"
     },
     "devDependencies": {
         "@types/dotenv": "^8.2.0",
