@@ -35,7 +35,23 @@ const sepolia = {
     name: "Sepolia",
     currency: "ETH",
     explorerUrl: "https://sepolia.etherscan.io",
-    rpcUrl: "https://rpc.sepolia.org",
+    rpcUrl: "https://sepolia.base.org",
+}
+
+const basesepolia = {
+    chainId: 84532,
+    name: "Base Sepolia",
+    currency: "ETH",
+    explorerUrl: "https://base-sepolia.blockscout.com",
+    rpcUrl: "https://sepolia.base.org",
+}
+
+const basemainnet = {
+    chainId: 8453,
+    name: "Base Mainnet",
+    currency: "ETH",
+    explorerUrl: "https://https://basescan.org",
+    rpcUrl: "https://mainnet.base.org",
 }
 
 const localhost = {
@@ -56,7 +72,15 @@ const metadata = {
 
 createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
-    chains: [mainnet, zksync, zksynctestnet, sepolia, localhost],
+    chains: [
+        mainnet,
+        zksync,
+        basemainnet,
+        sepolia,
+        zksynctestnet,
+        basesepolia,
+        localhost,
+    ],
     projectId,
 })
 
