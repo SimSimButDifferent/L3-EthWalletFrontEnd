@@ -12,7 +12,17 @@ NextJs, Typescript, ethers, web3modal and deployed to ipfs with fleek!
 
 https://ethwalletapp.on.fleek.co/
 
-Contract deployed on sepolia testnet - [0x0597071313ae58624FFbbDAB8643aD96E27eD3bc](https://sepolia.etherscan.io/address/0x0597071313ae58624ffbbdab8643ad96e27ed3bc)
+## Deployments
+
+ZkSync - [0xc3290b06957b9A75AA1EF4a99307DFB72faE6B01](https://explorer.zksync.io/address/0xc3290b06957b9A75AA1EF4a99307DFB72faE6B01)
+
+ZkSync testnet - [0x0729ABD1CD5d7BfE08F2d8Ce87c4C2cDD5FC7656](https://sepolia.explorer.zksync.io/address/0x0729ABD1CD5d7BfE08F2d8Ce87c4C2cDD5FC7656)
+
+Base - [0xddfEcC36670F8F3f875587f37E4982527E9410C4](https://basescan.org/address/0xddfecc36670f8f3f875587f37e4982527e9410c4)
+
+Base Sepolia - [0xddfEcC36670F8F3f875587f37E4982527E9410C4](https://basescan.org/address/0xddfecc36670f8f3f875587f37e4982527e9410c4)
+
+Sepolia testnet - [0xA5cAC1cC06D664A2E778C0192BAb6D2ebf989719](https://sepolia.basescan.org/address/0xa5cac1cc06d664a2e778c0192bab6d2ebf989719)
 
 ![image](https://github.com/SimSimButDifferent/L3-EthWalletFrontEnd/assets/88177427/f888da39-3fe4-45ab-b067-ab120c51024b)
 
